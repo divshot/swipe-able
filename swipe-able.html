@@ -15,6 +15,8 @@ common behavior. The available effects are
 
 - **dismiss**: the element moves with the user's pointer while swiping, and then
   slides away and disappears when the swipe is complete.
+- **grow**: the element grows while swiping, then returns to its original size
+  upon swipe completion.
 - **rubberband**: the element "stretches" away from center as the user's pointer
   moves, but snaps back to neutral when released.
 - **none**: the element stays put, and nothing happens.
@@ -101,6 +103,22 @@ callbacks if you need to know when the finish animation is complete.
             return player;
           },
           trigger: false
+        },
+        grow: {
+          _calcScale: function(dx) {
+            return 1.0 + (Math.log(Math.abs(dx)) / 40.0);
+          },
+          update: function(el, e) {
+            _applyTransform(el, "scale(" + _effects.grow._calcScale(e.dx) + ")");
+          },
+          finish: function(el, e) {
+            _applyTransform(el, undefined);
+            var player = el.animate([
+              {transform: 'scale(' + _effects.grow._calcScale(e.dx) + ')'},
+              {transform: 'scale(1.0)'}
+            ], {duration: 200});
+          },
+          trigger: true
         }
       }
       
@@ -154,7 +172,9 @@ callbacks if you need to know when the finish animation is complete.
           if (Math.abs(e.dx) > this.distanceThreshold) {
             var player = this._effect().finish(this, e);
             if (this._effect().trigger) {
-              this.fire("swipe", {effect: this[this.swipeDirection], direction: this.swipeDirection, animation: player});
+              var detail = {effect: this[this.swipeDirection], direction: this.swipeDirection, animation: player};
+              this.fire("swipe", detail);
+              this.fire("swipe" + detail.direction, detail);
             }
           } else {
             this.reset();
@@ -209,6 +229,16 @@ callbacks if you need to know when the finish animation is complete.
          * 
          * @event swipe
          */
+         
+         /**
+          * Same as `swipe`, but only triggered on left swipe.
+          * @event swipeleft
+          */
+          
+         /**
+          * Same as `swipe`, but only triggered on right swipe.
+          * @event swiperight
+          */
       });
     })();
   </script>
