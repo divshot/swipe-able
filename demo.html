@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>swipe-able Demo</title>
+
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="swipe-able.html">
+  <style>
+    body {
+      background: #eee;
+      font-family: sans-serif;
+    }
+    
+    #cards {
+      max-width: 400px; margin: 15px auto;
+    }
+    
+    #cards swipe-able {
+      padding: 30px 15px;
+      text-align: center;
+      box-shadow: 0 3px 3px #aaa;
+      border: 1px solid #ccc;
+      border-top: 0;
+      border-right: 0;
+      border-radius: 2px;
+      margin-bottom: 10px;
+      background: white;
+    }
+    
+    #message { text-align: center; }
+  </style>
+</head>
+<body unresolved>
+  <section id="cards">
+    <swipe-able>
+      Swipe left dismiss, right rubberband
+    </swipe-able>
+    <swipe-able left="rubberband" right="dismiss">
+      Swipe left to rubberband, right dismiss
+    </swipe-able>
+    <swipe-able left="rubberband" right="rubberband">
+      Rubberbands in both directions
+    </swipe-able>
+  </section>
+  
+  <p id="message"></p>
+  <script>
+    document.addEventListener('swipe', function(e) {
+      document.getElementById('message').innerHTML = "Swiped <b>" + e.detail.direction +"</b> with <b>" + e.detail.effect + "</b> effect.";
+    });
+  </script>
+</body>
+</html>

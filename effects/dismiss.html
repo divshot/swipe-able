@@ -1,0 +1,40 @@
+<link rel="import" href="../../core-animation/core-animation.html">
+<link rel="import" href="../../core-animation/core-animation-group.html">
+
+<core-animation-group id="left" type="par">
+  <core-animation duration="100">
+    <core-animation-keyframe>
+      <core-animation-prop name="transform" value="translateX(0)"></core-animation-prop>
+    </core-animation-keyframe>
+    <core-animation-keyframe>
+      <core-animation-prop name="transform" value="translateX(-100%)"></core-animation-prop>
+    </core-animation-keyframe>
+  </core-animation>
+  <core-animation duration="50" delay="50">
+    <core-animation-keyframe>
+      <core-animation-prop name="opacity" value="1.0"></core-animation-prop>
+    </core-animation-keyframe>
+    <core-animation-keyframe>
+      <core-animation-prop name="opacity" value="0.0"></core-animation-prop>
+    </core-animation-keyframe>
+  </core-animation>
+</core-animation-group>
+
+<core-animation-group id="right" type="par">
+  <core-animation duration="100">
+    <core-animation-keyframe>
+      <core-animation-prop name="transform" value="translateX(0)"></core-animation-prop>
+    </core-animation-keyframe>
+    <core-animation-keyframe>
+      <core-animation-prop name="transform" value="translateX(100%)"></core-animation-prop>
+    </core-animation-keyframe>
+  </core-animation>
+  <core-animation duration="50" delay="50">
+    <core-animation-keyframe>
+      <core-animation-prop name="opacity" value="1.0"></core-animation-prop>
+    </core-animation-keyframe>
+    <core-animation-keyframe>
+      <core-animation-prop name="opacity" value="0.0"></core-animation-prop>
+    </core-animation-keyframe>
+  </core-animation>
+</core-animation-group>
